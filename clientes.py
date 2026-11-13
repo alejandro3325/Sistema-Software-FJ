@@ -1,3 +1,5 @@
+import re
+
 from entidades import Entidad
 from excepciones import DatosInvalidosError
 
@@ -18,7 +20,9 @@ class Cliente(Entidad):
     @nombre.setter
     def nombre(self, valor):
         if not isinstance(valor, str) or len(valor.strip()) < 2:
-            raise DatosInvalidosError("El nombre debe tener al menos 2 caracteres.")
+            raise DatosInvalidosError(
+                "El nombre debe tener al menos 2 caracteres."
+            )
         self._nombre = valor.strip()
 
     @property
@@ -27,9 +31,19 @@ class Cliente(Entidad):
 
     @correo.setter
     def correo(self, valor):
-        if not isinstance(valor, str) or "@" not in valor or "." not in valor:
-            raise DatosInvalidosError("El correo electrónico no es válido.")
-        self._correo = valor.strip()
+        if not isinstance(valor, str):
+            raise DatosInvalidosError("El correo debe ser texto.")
+
+        valor = valor.strip()
+
+        patron = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+
+        if not re.fullmatch(patron, valor):
+            raise DatosInvalidosError(
+                "El correo electrónico no tiene un formato válido."
+            )
+
+        self._correo = valor
 
     @property
     def telefono(self):
@@ -38,10 +52,17 @@ class Cliente(Entidad):
     @telefono.setter
     def telefono(self, valor):
         texto = str(valor).strip()
-        if not texto.isdigit() or len(texto) < 7:
-            raise DatosInvalidosError("El teléfono debe contener al menos 7 dígitos.")
+
+        if not texto.isdigit() or not 7 <= len(texto) <= 15:
+            raise DatosInvalidosError(
+                "El teléfono debe contener entre 7 y 15 dígitos."
+            )
+
         self._telefono = texto
 
     def mostrar_informacion(self):
-        return (f"Cliente {self.identificador}: {self.nombre} | "
-                f"{self.correo} | {self.telefono}")
+        return (
+            f"Cliente {self.identificador}: "
+            f"{self.nombre} | {self.correo} | {self.telefono}"
+        )
+
