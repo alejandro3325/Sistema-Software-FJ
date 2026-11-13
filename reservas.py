@@ -3,12 +3,8 @@ import math
 from entidades import Entidad
 from clientes import Cliente
 from servicios import Servicio
-from excepciones import (
-    DatosInvalidosError,
-    OperacionNoPermitidaError
-)
+from excepciones import (DatosInvalidosError, OperacionNoPermitidaError)
 from registro import registrar_evento
-
 
 class Reserva(Entidad):
     """Relaciona un cliente con un servicio y controla su estado."""
