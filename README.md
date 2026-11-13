@@ -1,31 +1,59 @@
-# Sistema Integral de Gestión de Clientes, Servicios y Reservas - Software FJ
 
-Proyecto académico en Python para gestionar clientes, servicios y reservas sin utilizar bases de datos.
+# Sistema Integral de Gestión Software FJ
 
-## Requisitos
-- Python 3.9 o superior.
-- No requiere instalar paquetes externos.
+## Descripción
 
-## Archivos
-- `entidades.py`: clase abstracta general.
-- `clientes.py`: clase Cliente y validaciones.
-- `servicios.py`: clase abstracta Servicio y tres servicios especializados.
-- `reservas.py`: creación, confirmación, cancelación y procesamiento de reservas.
-- `excepciones.py`: excepciones personalizadas.
-- `registro.py`: registro de eventos y errores en `logs.txt`.
-- `main.py`: demostración de diez operaciones.
-- `logs.txt`: se genera automáticamente al ejecutar el programa y guarda eventos y errores.
+Proyecto desarrollado en Python para gestionar clientes,
+servicios y reservas de la empresa Software FJ.
 
-El cálculo de costos admite variantes mediante parámetros opcionales (horas, descuento e impuesto). También se incluye encadenamiento de excepciones con `raise ... from ...`, además de bloques `try/except/else/finally`.
+El sistema aplica principios de programación orientada a
+objetos y manejo avanzado de excepciones.
+
+## Funcionalidades
+
+- Registro y validación de clientes.
+- Gestión de servicios especializados.
+- Creación y confirmación de reservas.
+- Cancelación y procesamiento de reservas.
+- Cálculo de costos con descuentos e impuestos.
+- Manejo de excepciones personalizadas.
+- Registro de eventos y errores mediante logs.
+
+## Tecnologías
+
+- Python 3.
+- Programación orientada a objetos.
+- Manejo de archivos de registro.
+- Git y GitHub.
+
+## Estructura del proyecto
+
+- entidades.py
+- clientes.py
+- excepciones.py
+- servicios.py
+- reservas.py
+- registro.py
+- main.py
+- logs.txt (generado al ejecutar el programa).
 
 ## Ejecución
-Desde esta carpeta, ejecutar:
 
-```bash
-python main.py
-```
+1. Instalar Python 3.
+2. Descargar o clonar el repositorio.
+3. Abrir una terminal en la carpeta del proyecto.
+4. Ejecutar:
 
-El archivo `logs.txt` se crea automáticamente al ejecutar el programa.
+   python main.py
 
-## Nota de trabajo colaborativo
-Esta es una base inicial. El grupo debe revisar, ejecutar, probar y adaptar el proyecto conjuntamente, distribuir responsabilidades y documentar los aportes de cada integrante.
+## Almacenamiento
+
+El sistema no utiliza bases de datos.
+La información se administra mediante objetos y listas.
+Los archivos de registro almacenan eventos y errores.
+
+## Proyecto académico
+
+Curso: Programación
+Código: 213023
+Universidad Nacional Abierta y a Distancia (UNAD)
