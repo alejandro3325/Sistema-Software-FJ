@@ -24,7 +24,7 @@ objetos y manejo avanzado de excepciones.
 - Python 3.
 - Programación orientada a objetos.
 - Manejo de archivos de registro.
-- Git y GitHub.
+- GitHub.
 
 ## Estructura del proyecto
 
