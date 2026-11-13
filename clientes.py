@@ -20,9 +20,7 @@ class Cliente(Entidad):
     @nombre.setter
     def nombre(self, valor):
         if not isinstance(valor, str) or len(valor.strip()) < 2:
-            raise DatosInvalidosError(
-                "El nombre debe tener al menos 2 caracteres."
-            )
+            raise DatosInvalidosError("El nombre debe tener al menos 2 caracteres.")
         self._nombre = valor.strip()
 
     @property
@@ -39,9 +37,7 @@ class Cliente(Entidad):
         patron = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
 
         if not re.fullmatch(patron, valor):
-            raise DatosInvalidosError(
-                "El correo electrónico no tiene un formato válido."
-            )
+            raise DatosInvalidosError("El correo electrónico no tiene un formato válido.")
 
         self._correo = valor
 
@@ -54,15 +50,10 @@ class Cliente(Entidad):
         texto = str(valor).strip()
 
         if not texto.isdigit() or not 7 <= len(texto) <= 15:
-            raise DatosInvalidosError(
-                "El teléfono debe contener entre 7 y 15 dígitos."
-            )
+            raise DatosInvalidosError("El teléfono debe contener entre 7 y 15 dígitos.")
 
         self._telefono = texto
 
     def mostrar_informacion(self):
-        return (
-            f"Cliente {self.identificador}: "
-            f"{self.nombre} | {self.correo} | {self.telefono}"
-        )
+        return (f"Cliente {self.identificador}: "f"{self.nombre} | {self.correo} | {self.telefono}")
 
