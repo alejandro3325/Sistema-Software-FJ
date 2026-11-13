@@ -14,4 +14,4 @@ def registrar_evento(mensaje):
     logging.info(mensaje)
 
 def registrar_error(mensaje):
-    logging.exception(mensaje)
+    logging.error(mensaje)
