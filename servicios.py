@@ -1,3 +1,4 @@
+# math permite comprobar que los valores numéricos sean finitos
 import math
 from abc import abstractmethod
 
@@ -5,9 +6,11 @@ from entidades import Entidad
 from excepciones import DatosInvalidosError
 
 
+# Servicio es una clase abstracta que reune los atributos y comportamientos comunes
 class Servicio(Entidad):
-    """Clase abstracta que define el comportamiento de los servicios."""
+    #Clase abstracta que define el comportamiento de los servicios
 
+# Inicializa el servicio y valida su nombre y tarifa antes de almacenarlos
     def __init__(self, identificador, nombre, tarifa_base):
         super().__init__(identificador)
 
@@ -20,8 +23,9 @@ class Servicio(Entidad):
         self.nombre = nombre.strip()
         self.tarifa_base = float(tarifa_base)
 
+# Valida duración, descuento e impuesto antes de calcular un precio
     def _validar_calculo(self, horas, descuento, impuesto):
-        """Valida los datos utilizados para calcular los costos."""
+        # Valida los datos utilizados para calcular los costos
 
         self.validar_parametros(horas)
 
@@ -35,8 +39,9 @@ class Servicio(Entidad):
         if impuesto < 0:
             raise DatosInvalidosError("El impuesto no puede ser negativo.")
 
+# Aplica la formula general del costo con descuento e impuesto
     def _calcular_total(self, horas, descuento, impuesto):
-        """Realiza el cálculo general del costo."""
+        # Realiza el cálculo general del costo
 
         self._validar_calculo(horas, descuento, impuesto)
 
@@ -45,15 +50,24 @@ class Servicio(Entidad):
 
         return total
 
+# Las clases hijas deben validar la duración según el tipo de servicio
     @abstractmethod
+# Comprueba que las horas solicitadas sean un número positivo y válido
+# Comprueba que las horas de alquiler sean validas
+# Comprueba que la duración de la asesoría sea válida
     def validar_parametros(self, horas):
         pass
 
+# Las clases hijas deben implementar el cálculo del costo
     @abstractmethod
+# Calcula el costo de la sala usando el cálculo común de Servicio
+# Calcula el costo del alquiler de equipo
+# Calcula el costo de la asesoría especializada
     def calcular_costo(self, horas, descuento=0, impuesto=0):
         pass
 
 
+# Representa el servicio de reserva de una sala
 class ReservaSala(Servicio):
 
     def validar_parametros(self, horas):
@@ -63,10 +77,14 @@ class ReservaSala(Servicio):
     def calcular_costo(self, horas, descuento=0, impuesto=0):
         return self._calcular_total(horas, descuento, impuesto)
 
+# Devuelve una descripción del servicio de sala
+# Devuelve una descripción del equipo alquilado
+# Devuelve una descripción de la asesoría
     def mostrar_informacion(self):
         return (f"Sala: {self.nombre} | "f"Tarifa por hora: ${self.tarifa_base:,.2f}")
 
 
+# Representa el servicio de alquiler de equipos
 class AlquilerEquipo(Servicio):
 
     def validar_parametros(self, horas):
@@ -80,6 +98,7 @@ class AlquilerEquipo(Servicio):
         return (f"Equipo: {self.nombre} | "f"Tarifa por hora: ${self.tarifa_base:,.2f}")
 
 
+# Representa una asesoria especializada
 class AsesoriaEspecializada(Servicio):
 
     def validar_parametros(self, horas):
