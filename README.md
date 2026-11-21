@@ -1,4 +1,3 @@
-
 # Sistema Integral de Gestión Software FJ
 
 ## Descripción
@@ -57,3 +56,19 @@ Los archivos de registro almacenan eventos y errores.
 Curso: Programación
 Código: 213023
 Universidad Nacional Abierta y a Distancia (UNAD)
+
+## Interfaz gráfica con Tkinter
+
+El sistema cuenta con una interfaz gráfica de escritorio desarrollada con Tkinter.
+Para iniciarla, abre una terminal en la carpeta del proyecto y ejecuta:
+
+```bash
+python main.py
+```
+
+La ventana permite registrar clientes, crear servicios, gestionar reservas y consultar
+el archivo `logs.txt`. Los datos de clientes, servicios y reservas se mantienen en
+listas en memoria mientras la aplicación está abierta; no se utiliza una base de datos.
+
+El archivo `interfaz.py` contiene la interfaz gráfica y utiliza las clases de los módulos
+`clientes.py`, `servicios.py` y `reservas.py` para realizar las operaciones.
