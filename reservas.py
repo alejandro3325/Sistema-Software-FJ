@@ -1,3 +1,4 @@
+# math se utiliza para validar que descuento e impuesto sean valores finitos
 import math
 
 from entidades import Entidad
@@ -6,9 +7,11 @@ from servicios import Servicio
 from excepciones import (DatosInvalidosError, OperacionNoPermitidaError)
 from registro import registrar_evento
 
+# Reserva relaciona un cliente con un servicio y administra el estado de la operación
 class Reserva(Entidad):
-    """Relaciona un cliente con un servicio y controla su estado."""
+    # Relaciona un cliente con un servicio y controla su estado
 
+# Recibe los datos de la reserva, verifica los objetos y valida la duración
     def __init__(self, identificador, cliente, servicio, duracion):
         super().__init__(identificador)
 
@@ -31,6 +34,7 @@ class Reserva(Entidad):
 
         registrar_evento(f"Reserva {self.identificador} creada.")
 
+# Solo permite confirmar reservas que todavia están pendientes
     def confirmar(self):
         if self.estado != "Pendiente":
             raise OperacionNoPermitidaError("Solo se puede confirmar una reserva pendiente.")
@@ -39,14 +43,17 @@ class Reserva(Entidad):
 
         registrar_evento(f"Reserva {self.identificador} confirmada.")
 
+# Permite cancelar una reserva pendiente o confirmada
     def cancelar(self):
-        if self.estado == "Cancelada":
-            raise OperacionNoPermitidaError("La reserva ya está cancelada.")
+        if self.estado not in ("Pendiente", "Confirmada"):
+            raise OperacionNoPermitidaError(
+                f"No se puede cancelar una reserva en estado {self.estado.lower()}."
+            )
 
         self.estado = "Cancelada"
-
         registrar_evento(f"Reserva {self.identificador} cancelada.")
 
+# Procesa unicamente reservas confirmadas y calcula el total a pagar
     def procesar(self, descuento=0, impuesto=0):
         if self.estado != "Confirmada":
             raise OperacionNoPermitidaError("La reserva debe estar confirmada para procesarse.")
@@ -64,10 +71,12 @@ class Reserva(Entidad):
 
         total = self.servicio.calcular_costo(self.duracion, descuento, impuesto)
 
+        # La reserva cambia de estado unicamente si el cálculo fue exitoso
+        self.estado = "Procesada"
         registrar_evento(f"Reserva {self.identificador} procesada. "f"Total: ${total:.2f}")
 
         return total
 
+# Devuelve un resumen con el cliente, servicio, duración y estado de la reserva
     def mostrar_informacion(self):
         return (f"Reserva {self.identificador} | "f"Cliente: {self.cliente.nombre} | "f"Servicio: {self.servicio.nombre} | "f"Duración: {self.duracion} horas | "f"Estado: {self.estado}")
-
