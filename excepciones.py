@@ -12,3 +12,4 @@ class ElementoNoEncontradoError(SistemaFJError):
 
 class OperacionNoPermitidaError(SistemaFJError):
     """Se usa cuando una operación no está permitida."""
+
